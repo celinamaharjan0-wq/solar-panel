@@ -1,18 +1,22 @@
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.querySelector('.menu-toggle');
+  const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
 
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Optional: Simple ROI calculator (benefits page)
+  const calcForm = document.getElementById('roi-calculator');
+  if (calcForm) {
+    calcForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const bill = parseFloat(document.getElementById('monthly-bill').value) || 0;
+      const savings = bill * 0.75 * 12; // rough 75% savings
+      document.getElementById('result').innerHTML = `
+        <strong>Estimated yearly saving:</strong> NPR ${savings.toLocaleString()} 
+        <br><small>(after solar installation – approximate)</small>`;
     });
   }
-
-  // Optional: close mobile menu when clicking a link
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
-  });
 });
